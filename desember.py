@@ -1,19 +1,9 @@
-# -*- coding: utf-8 -*-
-#
-# Pastikan Anda telah menginstal library 'rich': pip install rich
-# Library ini digunakan untuk membuat tampilan konsol yang jauh lebih menarik dan profesional.
-
 from typing import Final
 from rich.console import Console
 from rich.panel import Panel
 from rich.text import Text
-
-# Inisialisasi objek Console dari 'rich'
-# Objek ini akan menangani semua pencetakan berformat
 console = Console()
 
-# --- DATA NARASI ---
-# Cerita disimpan dalam string multi-baris (triple quotes)
 FULL_STORY_TEXT: Final[str] = """
 Malam itu, hawa dingin menggigit seperti pengkhianatan. Aku sudah tersandung mengelilingi 
 blok apartemen ini entah sudah berapa kali—sebuah kebiasaan bodoh yang kumulai sejak kau 
@@ -85,11 +75,7 @@ def create_title_panel() -> Panel:
 
 def create_story_panel(story: str) -> Panel:
     """Membuat panel untuk konten cerita dengan gaya melankolis."""
-    # Mengubah teks cerita menjadi objek Text
     story_text = Text(story, style="italic dim white on black")
-    
-    # Menemukan dan memberi warna khusus pada beberapa kata kunci yang menonjol
-    # Contoh: 'Desember' diberi warna merah muda (magenta)
     story_text.highlight_regex(r"Desember", "bold magenta")
     story_text.highlight_regex(r"patah hati|kedinginan|sendirian|keracunan", "red")
     
@@ -103,16 +89,13 @@ def create_story_panel(story: str) -> Panel:
 def main():
     """Fungsi utama untuk menjalankan program dan menampilkan narasi."""
     try:
-        # 1. Tampilkan Judul Utama
         console.print(create_title_panel(), justify="center")
         console.print("\n")
         
-        # 2. Tampilkan Panel Cerita
         story_panel = create_story_panel(FULL_STORY_TEXT)
         console.print(story_panel, justify="center")
         
         console.print("\n")
-        # 3. Tampilkan Pesan Penutup
         console.print("[bold green]-- Narasi Berhasil Ditampilkan dengan Gaya Profesional --[/bold green]", justify="center")
         
     except Exception as e:
